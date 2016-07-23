@@ -1,0 +1,2 @@
+class ReaPropertyTaxRate < ApplicationRecord
+end

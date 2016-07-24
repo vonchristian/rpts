@@ -8,7 +8,25 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="hold-transition skin-blue-light sidebar-mini">
+    <div class="wrapper">
+      <%=render 'layouts/shared/header' %>
+      <%=render 'layouts/shared/sidebar' %>
+
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <%=render 'layouts/shared/flash' %>
+
     <%= yield %>
+  </section>
   </body>
 </html>

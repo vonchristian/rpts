@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @taxpayer.first_name %>
+</p>
+
+<p>
+  <strong>Middle name:</strong>
+  <%= @taxpayer.middle_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @taxpayer.last_name %>
+</p>
+
+<p>
+  <strong>Suffix:</strong>
+  <%= @taxpayer.suffix %>
+</p>
+
+<p>
+  <strong>Mobile:</strong>
+  <%= @taxpayer.mobile %>
+</p>
+
+<%= link_to 'Edit', edit_taxpayer_path(@taxpayer) %> |
+<%= link_to 'Back', taxpayers_path %>

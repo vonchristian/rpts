@@ -1,19 +1,13 @@
-<%=link_to properties_building_path(@building) do %>
-<span class="btn btn-default"><i class="fa fa-file-text"></i> Print (PDF)</span>
-<% end %>
-<%=@building.arp_number %>
-Location
-<%=@building.address_details %>
 <div class="col-md-9">
   <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
       <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
-      <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
-      <li><a href="#settings" data-toggle="tab">Settings</a></li>
+      <li><a href="#timeline" data-toggle="tab">Assessment</a></li>
+      <li><a href="#settings" data-toggle="tab">Tax Declaration</a></li>
     </ul>
     <div class="tab-content">
       <div class="active tab-pane" id="info">
-        <i class="fa fa-map-marker"></i> <%=@building.address_details %>
+        <i class="fa fa-map-marker"></i> <%=@property.address_details %>
 
       </div>
       <!-- /.tab-pane -->

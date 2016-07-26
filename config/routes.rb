@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :machineries, module: :properties
 
   end
+  resources :properties
   namespace :properties do
     resources :lands
     resources :buildings

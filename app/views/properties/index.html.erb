@@ -1,0 +1,30 @@
+<%=link_to 'Land', properties_lands_path, class: 'btn btn-primary' %>
+<%=link_to 'Buildings', properties_lands_path, class: 'btn btn-primary' %>
+<%=link_to 'Machinery', properties_lands_path, class: 'btn btn-primary' %>
+<br>
+<br>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h4 class="title"> Real Properties </h4>
+
+  <div class="table table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Type </th>
+          <th>ARP Number </th>
+          <th>Owner</th>
+          <th>Address </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%@properties.each do |property| %>
+          <tr class='clickable-row' data-href='<%=property_path(property) %>'>
+           <td><%=property.type.gsub('Properties::', '') %></td>
+           <td><%=property.arp_number %></td>
+           <td><%=property.taxpayer.full_name %></td>
+           <td><%=property.address_details %></td>
+           <td><%=link_to 'PDF', property, class: 'btn btn-success btn-sm' %>
+         </tr>
+        <% end %>

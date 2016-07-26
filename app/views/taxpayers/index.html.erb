@@ -1,21 +1,43 @@
-<%=link_to 'New Taxpayer', new_taxpayer_path, class: 'btn btn-primary' %>
 <div class="panel panel-default">
-  <div class="panel-heading"> Taxpayers </div>
   <div class="panel-body">
+    <div class="row">
+      <div class="col-md-2">
+        <h4>Taxpayers List</h4>
+      </div>
+      <div class="col-md-3">
+        <h4 class="title">Location &nbsp; &nbsp;
+          <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> All Location
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Lagawe</a></li>
+              <li><a href="#">Tinoc</a></li>
+            </ul>
+          </div>
+        </h4>
+      </div>
+      <div class="col-md-3">
+        <%=link_to 'New Taxpayer', new_taxpayer_path, class: 'btn btn-primary' %>
+      </div>
+    </div>
+    <hr>
   <div class="table table-responsive">
     <table class="table table-hover">
       <thead>
         <tr>
           <th>Name </th>
+          <th> Mobile </th>
           <th>Address </th>
           <th>Real Properties </th>
         </tr>
       </thead>
       <tbody>
         <% @taxpayers.each do |taxpayer| %>
-          <tr>
+            <tr class='clickable-row' data-href='<%=taxpayer_path(taxpayer) %>'>
             <td><%= link_to taxpayer.full_name, taxpayer %></td>
-            <td></td>
+            <td><%= taxpayer.mobile %></td>
+            <td><%= taxpayer.address_details %></td>
             <td></td>
           </tr>
         <% end %>

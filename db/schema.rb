@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160726031808) do
+ActiveRecord::Schema.define(version: 20160726101040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,19 @@ ActiveRecord::Schema.define(version: 20160726031808) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "land_details", force: :cascade do |t|
+    t.integer  "property_id"
+    t.string   "classification"
+    t.string   "sub_class"
+    t.string   "actual_user"
+    t.decimal  "area"
+    t.decimal  "unit_value"
+    t.decimal  "market_value"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["property_id"], name: "index_land_details_on_property_id", using: :btree
+  end
+
   create_table "machinery_details", force: :cascade do |t|
     t.string   "description"
     t.integer  "property_id"
@@ -72,6 +85,15 @@ ActiveRecord::Schema.define(version: 20160726031808) do
     t.index ["property_id"], name: "index_machinery_details_on_property_id", using: :btree
   end
 
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text     "content"
+    t.string   "searchable_type"
+    t.integer  "searchable_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
+  end
+
   create_table "properties", force: :cascade do |t|
     t.decimal  "land_area"
     t.datetime "created_at", null: false
@@ -79,6 +101,7 @@ ActiveRecord::Schema.define(version: 20160726031808) do
     t.string   "type"
     t.string   "arp_number"
     t.integer  "user_id"
+    t.string   "pin_number"
     t.index ["type"], name: "index_properties_on_type", using: :btree
     t.index ["user_id"], name: "index_properties_on_user_id", using: :btree
   end
@@ -159,6 +182,7 @@ ActiveRecord::Schema.define(version: 20160726031808) do
   end
 
   add_foreign_key "assessments", "properties"
+  add_foreign_key "land_details", "properties"
   add_foreign_key "machinery_details", "properties"
   add_foreign_key "structural_characteristics", "properties"
 end

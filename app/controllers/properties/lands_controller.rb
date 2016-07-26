@@ -4,6 +4,8 @@ module Properties
       @taxpayer = Taxpayer.find(params[:taxpayer_id])
       @land = @taxpayer.land_properties.build
       @land.build_address
+      @land.build_administrator
+
     end
     def create
       @taxpayer = Taxpayer.find(params[:taxpayer_id])

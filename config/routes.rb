@@ -3,9 +3,14 @@ Rails.application.routes.draw do
   root to: "taxpayers#index"
   resources :taxpayers do
     resources :lands, module: :properties
+    resources :buildings, module: :properties
+    resources :machineries, module: :properties
+
   end
   namespace :properties do
     resources :lands
+    resources :buildings
+    resources :machineries
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

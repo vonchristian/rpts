@@ -1,12 +1,12 @@
-<%=simple_form_for [@taxpayer, @land], url: :taxpayer_lands do |f| %>
+<%=simple_form_for [@taxpayer, @building], url: :taxpayer_buildings do |f| %>
   <%=f.error_notification %>
   <%=f.input :arp_number %>
   <%=f.input :land_area %>
   <%=f.simple_fields_for :address do |a| %>
     <%=a.input :street %>
   <% end %>
-  <%=f.simple_fields_for :administrator do |aa| %>
-    <%=aa.input :first_name %>
+  <%=f.simple_fields_for :structural_characteristic do |s| %>
+    <%=s.input :foundation %>
   <% end %>
   <%=f.submit 'Save' %>
 <% end %>

@@ -1,1 +1,25 @@
 <%=link_to 'New Taxpayer', new_taxpayer_path, class: 'btn btn-primary' %>
+<div class="panel panel-default">
+  <div class="panel-heading"> Taxpayers </div>
+  <div class="panel-body">
+  <div class="table table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name </th>
+          <th>Address </th>
+          <th>Real Properties </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @taxpayers.each do |taxpayer| %>
+          <tr>
+            <td><%= link_to taxpayer.full_name, taxpayer %></td>
+            <td></td>
+            <td></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725121853) do
+ActiveRecord::Schema.define(version: 20160726031808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,20 @@ ActiveRecord::Schema.define(version: 20160725121853) do
     t.index ["addressable_type"], name: "index_addresses_on_addressable_type", using: :btree
   end
 
+  create_table "assessments", force: :cascade do |t|
+    t.integer  "property_id"
+    t.boolean  "taxable"
+    t.decimal  "adjusted_market_value"
+    t.decimal  "assessment_level"
+    t.decimal  "assessed_value"
+    t.decimal  "previous_assessed_value"
+    t.decimal  "previous_adjusted_market_value"
+    t.date     "effectivity"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["property_id"], name: "index_assessments_on_property_id", using: :btree
+  end
+
   create_table "classifications", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -39,6 +53,23 @@ ActiveRecord::Schema.define(version: 20160725121853) do
     t.decimal  "percent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "machinery_details", force: :cascade do |t|
+    t.string   "description"
+    t.integer  "property_id"
+    t.string   "brand_and_serial_number"
+    t.string   "capacity"
+    t.date     "date_acquired"
+    t.integer  "condition_when_acquired"
+    t.decimal  "economic_life_estimated"
+    t.decimal  "economic_life_remaining"
+    t.date     "date_of_installation"
+    t.date     "date_of_operation"
+    t.text     "remarks"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["property_id"], name: "index_machinery_details_on_property_id", using: :btree
   end
 
   create_table "properties", force: :cascade do |t|
@@ -56,6 +87,46 @@ ActiveRecord::Schema.define(version: 20160725121853) do
     t.decimal  "rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "structural_characteristics", force: :cascade do |t|
+    t.integer  "property_id"
+    t.string   "foundation"
+    t.string   "columns"
+    t.string   "beams"
+    t.string   "truss_frame"
+    t.string   "roof"
+    t.string   "exterior_wall_front"
+    t.string   "exterior_walls_rear"
+    t.string   "exterior_wall_right"
+    t.string   "exterior_walls_left"
+    t.string   "exterior_walls_inside"
+    t.string   "flooring"
+    t.string   "floor_finish"
+    t.string   "structural_type"
+    t.string   "classification"
+    t.string   "building_permit"
+    t.string   "afe"
+    t.integer  "height_or_storey"
+    t.integer  "number_of_rooms"
+    t.string   "stairs"
+    t.string   "windows"
+    t.string   "partition"
+    t.string   "partition_finish"
+    t.string   "door"
+    t.string   "electrical"
+    t.string   "plumbing_or_sewer"
+    t.string   "paintings"
+    t.string   "ceiling"
+    t.string   "ceiling_finish"
+    t.date     "date_cosntructed"
+    t.date     "date_completed"
+    t.date     "date_occupied"
+    t.string   "area_of_ground_floor"
+    t.string   "total_building_area"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["property_id"], name: "index_structural_characteristics_on_property_id", using: :btree
   end
 
   create_table "tax_declaration_numbers", force: :cascade do |t|
@@ -82,8 +153,12 @@ ActiveRecord::Schema.define(version: 20160725121853) do
     t.string   "mobile"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "full_name"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "assessments", "properties"
+  add_foreign_key "machinery_details", "properties"
+  add_foreign_key "structural_characteristics", "properties"
 end

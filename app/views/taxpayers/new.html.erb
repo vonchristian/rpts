@@ -1,5 +1,24 @@
-<h1>New Taxpayer</h1>
+<div class="content">
+<div class="col-md-12">
+<div class="panel panel-default">
+  <div class="panel-heading"> Taxpayer Details </div>
+  <div class="panel-body">
+<%=simple_form_for @taxpayer do |f| %>
+  <%=f.error_notification %>
+  <div class="row">
+    <div class="col-md-4">
+      <%=f.input :first_name %>
+    </div>
+    <div class="col-md-4">
+      <%=f.input :last_name %>
+    </div>
+  </div>
+  <%=f.input :email %>
+  <%=f.input :mobile %>
+  <%=f.input :password %>
+  <%=f.input :password_confirmation %>
+  <div class="modal-footer">
+    <%=f.submit 'Save', class: 'btn btn-primary' %>
+  </div>
 
-<%= render 'form', taxpayer: @taxpayer %>
-
-<%= link_to 'Back', taxpayers_path %>
+<% end %>

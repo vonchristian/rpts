@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160724011537) do
+ActiveRecord::Schema.define(version: 20160725121853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "house_number"
+    t.string   "street"
+    t.string   "barangay"
+    t.string   "municipality"
+    t.string   "province"
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["addressable_id"], name: "index_addresses_on_addressable_id", using: :btree
+    t.index ["addressable_type"], name: "index_addresses_on_addressable_type", using: :btree
+  end
+
+  create_table "classifications", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "discounts", force: :cascade do |t|
     t.decimal  "percent"
@@ -22,10 +42,14 @@ ActiveRecord::Schema.define(version: 20160724011537) do
   end
 
   create_table "properties", force: :cascade do |t|
-    t.string   "number"
     t.decimal  "land_area"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "type"
+    t.string   "arp_number"
+    t.integer  "user_id"
+    t.index ["type"], name: "index_properties_on_type", using: :btree
+    t.index ["user_id"], name: "index_properties_on_user_id", using: :btree
   end
 
   create_table "rea_property_tax_rates", force: :cascade do |t|
@@ -40,14 +64,26 @@ ActiveRecord::Schema.define(version: 20160724011537) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "taxpayers", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.string   "type"
     t.string   "first_name"
     t.string   "middle_name"
     t.string   "last_name"
-    t.string   "suffix"
     t.string   "mobile"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
 end
